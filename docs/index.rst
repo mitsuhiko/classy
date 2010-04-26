@@ -128,7 +128,7 @@ What you can do with Classy:
    class was created and gets all the arguments passed when the
    object was created:
 
-    .. sourcecode:: javascript
-    
-        var leo = new Tiger("Leo", 3);
-        // --> __init__ is invoked with "Leo" and 3
+   .. sourcecode:: javascript
+   
+       var leo = new Tiger("Leo", 3);
+       // --> __init__ is invoked with "Leo" and 3

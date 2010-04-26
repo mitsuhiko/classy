@@ -1,0 +1,6 @@
+Classy is written and maintained by Armin Ronacher.
+
+- Armin Ronacher <armin.ronacher@active-4.com>
+
+Implementation is heavily inspired by John Resig's simple JavaScript
+inheritance: http://ejohn.org/blog/simple-javascript-inheritance/

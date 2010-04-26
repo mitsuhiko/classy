@@ -121,3 +121,14 @@ What you can do with Classy:
    When called from within a Classy function this invokes the parent
    function of the same name.  The arguments are forwarded directly.
    Check out the examples above for how that works.
+
+.. js:function:: Class.__init__()
+
+   The constuctor of a class.  This is created immediately after a
+   class was created and gets all the arguments passed when the
+   object was created:
+
+    .. sourcecode:: javascript
+    
+        var leo = new Tiger("Leo", 3);
+        // --> __init__ is invoked with "Leo" and 3

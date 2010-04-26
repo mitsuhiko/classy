@@ -132,3 +132,32 @@ What you can do with Classy:
    
        var leo = new Tiger("Leo", 3);
        // --> __init__ is invoked with "Leo" and 3
+
+.. js:attribute:: Class.__include__
+
+   When this attribute is provided when the class is created and set to a
+   list of ordinary objects, each attribute of such an object is mixed
+   into the class.  Imagine you have some functionality you want to export
+   from multiple classes, this is the perfect way:
+
+   .. sourcecode:: javascript
+    
+      var UpdateMixin = {
+        update : function(options) {
+          var (var key in options)
+            this[key] = options[key];
+        }
+      };
+
+      var MyClass = Class.$extend({
+        __include__ : [UpdateMixin]
+      });
+
+      var obj = MyClass();
+      obj.update({foo: 1, bar: 2});
+      // obj.foo --> 1
+
+   This is similar to subclassing but has the advantage that you can mix
+   multiple functions in at the same time.  Please note that you can only
+   mix in regular objects, not actual classes with a prototype (like those
+   created with `Class.$extend`).

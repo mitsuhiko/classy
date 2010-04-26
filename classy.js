@@ -55,7 +55,7 @@
     var super_prototype = this.prototype;
 
     /* disable constructors and instanciate prototype.  Because the
-       prototype can't raise an exception when created, we are save
+       prototype can't raise an exception when created, we are safe
        without a try/finally here. */
     disable_constructor = true;
     var prototype = new this;

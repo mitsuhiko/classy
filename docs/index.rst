@@ -95,7 +95,7 @@ What you can do with Classy:
 
    The version of Classy as string (``1.0`` for instance).
 
-.. js:function:: Class.$extends(properties)
+.. js:function:: Class.$extend(properties)
 
    Creates a new class by extending the given class.  The `properties`
    is an object with class attributes and methods (functions) for this

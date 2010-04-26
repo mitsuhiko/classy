@@ -8,9 +8,17 @@ is a small JavaScript library that implements Python inspired classes for
 JavaScript.
 
 Where can you get that classy library?  You can get it from `github
-<http://github.com/mitsuhiko/classy>`_.
+<http://github.com/mitsuhiko/classy>`_:
+`Classy 1.0 <http://github.com/mitsuhiko/classy/raw/1.0/classy.js>`_
 
 How does this look like?
+
+Enabling The Library
+--------------------
+
+.. sourcecode:: html
+
+   <script type="text/javascript" src="classy.js"></script>
 
 Defining Classes
 ----------------

@@ -20,13 +20,13 @@ test('$noConflict unsets Class from window', function() {
 
 test('$super calls parent method', function() {
   var Greeter = Class.$extend({
-    greeting: function() { return 'Armin!'; },
+    greeting: function() { return 'Armin!'; }
   });
   var Spaniard = Greeter.$extend({
-    greeting: function() { return 'Hola, ' + this.$super(); },
+    greeting: function() { return 'Hola, ' + this.$super(); }
   });
   var Englishman = Greeter.$extend({
-    greeting: function() { return 'Hello, ' + this.$super(); },
+    greeting: function() { return 'Hello, ' + this.$super(); }
   });
   same((Spaniard().greeting()), 'Hola, Armin!',
     'Spanish greeting generated.');
@@ -96,10 +96,10 @@ test('mixins work', function() {
     'is_fat': true,
     'describe': function() {
       return this.name + ' is fat!';
-    },
+    }
   };
   FatCat = Cat.$extend({
-    '__include__': [FatMixin],
+    '__include__': [FatMixin]
   });
   garfield = FatCat({name:'Garfield'});
 
@@ -111,14 +111,14 @@ test('mixins work', function() {
 
 test('exercise test methods', function() {
   var tick = Parasite();
-  var leo = Lion()
+  var leo = Lion();
   var garfield = HouseCat();
 
   ok(!(garfield.scary),
-    'Cat instances are not scary.')
+    'Cat instances are not scary.');
 
   ok(leo.scary,
-    'Lion instances are scary.')
+    'Lion instances are scary.');
 
   equal(garfield.health, 100,
     'default health is 100');

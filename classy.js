@@ -7,7 +7,7 @@
 
 ;(function(undefined) {
   var
-    CLASSY_VERSION = '1.0',
+    CLASSY_VERSION = '1.1',
     root = this,
     old_class = Class,
     disable_constructor = false;
@@ -36,6 +36,14 @@
       ? obj[name] : undefined;
   }
 
+  /* instanciate a class without calling the constructor */
+  function cheapNew(cls) {
+    disable_constructor = true;
+    var rv = new cls;
+    disable_constructor = false;
+    return rv;
+  }
+
   /* the base class we export */
   var Class = function() {};
 
@@ -57,9 +65,7 @@
     /* disable constructors and instanciate prototype.  Because the
        prototype can't raise an exception when created, we are safe
        without a try/finally here. */
-    disable_constructor = true;
-    var prototype = new this;
-    disable_constructor = false;
+    var prototype = cheapNew(this);
 
     /* copy all properties of the includes over if there are any */
     if (properties.__include__)
@@ -97,7 +103,7 @@
     var rv = function Class() {
       if (disable_constructor)
         return;
-      var proper_this = root === this ? new arguments.callee : this;
+      var proper_this = root === this ? cheapNew(arguments.callee) : this;
       if (proper_this.__init__)
         proper_this.__init__.apply(proper_this, arguments);
       return proper_this;

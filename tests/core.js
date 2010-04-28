@@ -36,12 +36,12 @@ test('$super calls parent method', function() {
 
 test('$extend exists and works', function() {
   same(typeof(Class.$extend), 'function',
-    'basic class has $extends function');
+    'basic class has $extend function');
 
   var SubClass = Class.$extend({});
 
   same(typeof(SubClass.$extend), 'function',
-    'subclasses also receive $extends');
+    'subclasses also receive $extend');
 
   same(SubClass.$extend, Class.$extend,
     'base class and subclass have same $extend function');
@@ -137,3 +137,14 @@ test('exercise test methods', function() {
     'garfield loses a life');
 });
 
+test('non-new creation calls __init__ just once', function() {
+  var catched = [];
+  var Test = Class.$extend({
+    __init__ : function() {
+      catched.push(true);
+    }
+  });
+  Test();
+  new Test();
+  equal(catched.length, 2);
+});

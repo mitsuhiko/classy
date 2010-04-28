@@ -9,7 +9,7 @@ JavaScript.
 
 Where can you get that classy library?  You can get it from `github
 <http://github.com/mitsuhiko/classy>`_:
-`Classy 1.0 <http://github.com/mitsuhiko/classy/raw/1.0/classy.js>`_
+`Classy 1.1 <http://github.com/mitsuhiko/classy/raw/1.1/classy.js>`_
 
 How does this look like?
 

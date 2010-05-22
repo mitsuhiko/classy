@@ -144,7 +144,7 @@ What you can do with Classy:
    function of the same name.  The arguments are forwarded directly.
    Check out the examples above for how that works.
 
-.. js:attr:: this.$class
+.. js:attribute:: this.$class
 
    The class object for this instance.  This is especially useful to
    acccess class attributes from instances.

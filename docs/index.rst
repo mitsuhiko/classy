@@ -9,7 +9,7 @@ JavaScript.
 
 Where can you get that classy library?  You can get it from `github
 <http://github.com/mitsuhiko/classy>`_:
-`Classy 1.1 <http://github.com/mitsuhiko/classy/raw/1.1/classy.js>`_
+`Classy 1.2 <http://github.com/mitsuhiko/classy/raw/1.2/classy.js>`_
 
 How does this look like?
 
@@ -101,6 +101,28 @@ What you can do with Classy:
    is an object with class attributes and methods (functions) for this
    class.
 
+.. js:function:: Class.$withData(data)
+
+   Creates a new instance of the class by bypassing the constructor and
+   assigning the attributes from the given object.  This is useful if you
+   want to attach methods to an object recieved from a JSON object:
+
+   .. sourcecode:: javascript
+
+      var MyClass = Class.$extend({
+        __init__ : function() { alert('called'); },
+        toString() : function() {
+          return this.value;
+        })
+      });
+      var obj = MyClass.$withData({value: 42});
+      alert(obj.toString());
+
+   The example above will alert ``"42"`` only.  So the constructor is not
+   called but you have access to the methods defined in the class.
+
+   .. versionadded:: 1.2
+
 .. js:function:: Class.$noConflict()
 
    Removes the `Class` object from the `window` object and restores what
@@ -121,6 +143,13 @@ What you can do with Classy:
    When called from within a Classy function this invokes the parent
    function of the same name.  The arguments are forwarded directly.
    Check out the examples above for how that works.
+
+.. js:attr:: this.$class
+
+   The class object for this instance.  This is especially useful to
+   acccess class attributes from instances.
+
+   .. versionadded:: 1.2
 
 .. js:function:: Class.__init__()
 

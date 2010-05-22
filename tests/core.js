@@ -148,3 +148,44 @@ test('non-new creation calls __init__ just once', function() {
   new Test();
   equal(catched.length, 2);
 });
+
+test('class attributes work', function() {
+  var Test = Class.$extend({
+    __classvars__ : {
+      foo: 23,
+      bar: 'test'
+    },
+    __init__ : function() {
+      this.foo = 42;
+    }
+  });
+
+  equal(Test.foo, 23, 'Test.foo is 23');
+  equal(Test.bar, 'test', 'Test.bar is "test"');
+  equal(Test().foo, 42, 'Test().foo is 42');
+});
+
+test('patching in prototypes', function() {
+  var called = [];
+  var Test = Class.$extend({
+    __init__ : function() {
+      called.push(42);
+    },
+    toString : function() {
+      return this.foo + ' ' + this.bar;
+    }
+  });
+  var data = {'foo': 23, 'bar': 42};
+  var obj = Test.$withData(data);
+  equal(obj.foo, 23, 'Test.foo is 23');
+  equal(obj.bar, 42, 'Test.bar is 42');
+  equal(obj.toString(), '23 42', 'Test.toString() is "23 42"');
+  equal(called.length, 0, 'constructor was never called');
+});
+
+test('$class gives class access', function() {
+  var Test = Class.$extend({
+    __classvars__ : {'classattr': 42}
+  });
+  equal(Test().$class.classattr, 42, 'classattr is 42');
+});

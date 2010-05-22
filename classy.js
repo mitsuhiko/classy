@@ -81,7 +81,9 @@
     /* copy all properties over to the new prototype */
     for (var name in properties) {
       var value = getOwnProperty(properties, name);
-      if (name === '__include__' || value === undefined)
+      if (name === '__include__' ||
+          name === '__classvars__' ||
+          value === undefined)
         continue;
 
       prototype[name] = typeof value === 'function' && usesSuper(value) ?
@@ -106,14 +108,35 @@
       var proper_this = root === this ? cheapNew(arguments.callee) : this;
       if (proper_this.__init__)
         proper_this.__init__.apply(proper_this, arguments);
+      proper_this.$class = rv;
       return proper_this;
     }
+
+    /* copy all class vars over of any */
+    if (properties.__classvars__)
+      for (var key in properties.__classvars__) {
+        var value = getOwnProperty(properties.__classvars__, key);
+        if (value !== undefined)
+          rv[key] = value;
+      }
 
     /* copy prototype and constructor over, reattach $extend and
        return the class */
     rv.prototype = prototype;
     rv.constructor = rv;
     rv.$extend = Class.$extend;
+    rv.$withData = Class.$withData;
+    return rv;
+  };
+
+  /* instanciate with data functionality */
+  Class.$withData = function(data) {
+    var rv = cheapNew(this);
+    for (var key in data) {
+      var value = getOwnProperty(data, key);
+      if (value !== undefined)
+        rv[key] = value;
+    }
     return rv;
   };
 

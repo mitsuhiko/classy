@@ -190,3 +190,24 @@ What you can do with Classy:
    multiple functions in at the same time.  Please note that you can only
    mix in regular objects, not actual classes with a prototype (like those
    created with `Class.$extend`).
+
+.. js:attribute:: Class.__classvars__
+
+   An object of items that should be added to the class as class level
+   attributes:
+
+   .. sourcecode:: javascript
+
+      var MyClass = Class.$extend({
+          __classvars__ : {
+            MAX_ITEMS : 42
+          }
+      });
+      alert(MyClass.MAX_ITEMS);
+
+    This shows a message box with ``"42"``.  To access these attributes
+    from an instance, use the ``$class`` attribute of instances:
+
+   .. sourcecode:: javascript
+
+      alert(MyClass().$class.MAX_ITEMS);

@@ -7,7 +7,7 @@
 
 ;(function(undefined) {
   var
-    CLASSY_VERSION = '1.1',
+    CLASSY_VERSION = '1.2',
     root = this,
     old_class = Class,
     disable_constructor = false;

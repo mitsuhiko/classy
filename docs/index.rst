@@ -205,9 +205,11 @@ What you can do with Classy:
       });
       alert(MyClass.MAX_ITEMS);
 
-    This shows a message box with ``"42"``.  To access these attributes
-    from an instance, use the ``$class`` attribute of instances:
+   This shows a message box with ``"42"``.  To access these attributes
+   from an instance, use the ``$class`` attribute of instances:
 
    .. sourcecode:: javascript
 
       alert(MyClass().$class.MAX_ITEMS);
+
+   .. versionadded:: 1.2

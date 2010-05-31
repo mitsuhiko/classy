@@ -102,7 +102,7 @@
     }
 
     /* dummy constructor */
-    var rv = function Class() {
+    var rv = function() {
       if (disable_constructor)
         return;
       var proper_this = root === this ? cheapNew(arguments.callee) : this;

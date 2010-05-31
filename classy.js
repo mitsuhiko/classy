@@ -7,7 +7,7 @@
 
 ;(function(undefined) {
   var
-    CLASSY_VERSION = '1.2',
+    CLASSY_VERSION = '1.3',
     root = this,
     old_class = Class,
     disable_constructor = false;
@@ -51,7 +51,13 @@
      different versions of the classy library to be used side by side and
      in combination with other libraries. */
   Class.$noConflict = function() {
-    setOrUnset(root, 'Class', old_class);
+    try {
+      setOrUnset(root, 'Class', old_class);
+    }
+    catch (e) {
+      // fix for IE that does not support delete on window
+      root.Class = old_class;
+    }
     return Class;
   };
 

@@ -171,6 +171,9 @@ test('patching in prototypes', function() {
     __init__ : function() {
       called.push(42);
     },
+    getFoo : function() {
+      return this.foo;
+    },
     toString : function() {
       return this.foo + ' ' + this.bar;
     }
@@ -179,7 +182,10 @@ test('patching in prototypes', function() {
   var obj = Test.$withData(data);
   equal(obj.foo, 23, 'Test.foo is 23');
   equal(obj.bar, 42, 'Test.bar is 42');
-  equal(obj.toString(), '23 42', 'Test.toString() is "23 42"');
+  equal(obj.getFoo(), obj.foo, 'getFoo() returns foo');
+  // IE bug we cannot support
+  if (!navigator.userAgent.match(/MSIE/))
+    equal(obj.toString(), '23 42', 'Test.toString() is "23 42"');
   equal(called.length, 0, 'constructor was never called');
 });
 

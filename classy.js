@@ -1,7 +1,7 @@
 /**
  * Classy - classy classes for JavaScript
  *
- * :copyright: (c) 2010 by Armin Ronacher.
+ * :copyright: (c) 2010 by Armin Ronacher. 
  * :license: BSD.
  */
 
@@ -83,12 +83,20 @@
             prototype[name] = mixin[name];
         }
       }
+ 
+    /* copy class vars from the superclass */
+    properties.__classvars__ = properties.__classvars__ || {};
+    if (prototype.__classvars__)
+      for (var key in prototype.__classvars__)
+        if (!properties.__classvars__[key]) {
+          var value = getOwnProperty(prototype.__classvars__, key);
+          properties.__classvars__[key] = value;
+        }
 
     /* copy all properties over to the new prototype */
     for (var name in properties) {
       var value = getOwnProperty(properties, name);
       if (name === '__include__' ||
-          name === '__classvars__' ||
           value === undefined)
         continue;
 
@@ -119,12 +127,11 @@
     }
 
     /* copy all class vars over of any */
-    if (properties.__classvars__)
-      for (var key in properties.__classvars__) {
-        var value = getOwnProperty(properties.__classvars__, key);
-        if (value !== undefined)
-          rv[key] = value;
-      }
+    for (var key in properties.__classvars__) {
+      var value = getOwnProperty(properties.__classvars__, key);
+      if (value !== undefined)
+        rv[key] = value;
+    }
 
     /* copy prototype and constructor over, reattach $extend and
        return the class */

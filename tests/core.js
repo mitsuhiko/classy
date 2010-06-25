@@ -195,3 +195,28 @@ test('$class gives class access', function() {
   });
   equal(Test().$class.classattr, 42, 'classattr is 42');
 });
+
+test('class variable inheritance', function() {
+  var Test = Class.$extend({
+    __classvars__ : {
+      foo: 23,
+      bar: 'test'
+    }
+  });
+  var SubTest = Test.$extend({
+    __classvars__ : {
+      bar: 'subtest'
+    }
+  });
+  var SubSubTest = SubTest.$extend({
+    __classvars__ : {
+      foo: 999
+    }
+  });
+
+  ok(SubTest.foo, 'SubTest also has a foo');
+  equal(SubTest.foo, Test.foo, 'SubTest.foo is Test.foo');
+  equal(SubTest.bar, 'subtest', 'SubTest.bar has been overridden');
+  equal(SubSubTest.bar, SubTest.bar, 'SubSubTest.bar is Test.bar');
+  equal(SubSubTest.foo, 999, 'SubSubTest.foo has been overridden');
+});

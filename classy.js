@@ -9,7 +9,7 @@
   var
     CLASSY_VERSION = '1.3',
     root = this,
-    old_class = Class,
+    old_class = root.Class,
     disable_constructor = false;
 
   /* we check if $super is in use by a class if we can.  But first we have to

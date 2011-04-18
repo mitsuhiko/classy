@@ -1,13 +1,13 @@
 /**
  * Classy - classy classes for JavaScript
  *
- * :copyright: (c) 2010 by Armin Ronacher. 
+ * :copyright: (c) 2011 by Armin Ronacher. 
  * :license: BSD.
  */
 
 ;(function(undefined) {
   var
-    CLASSY_VERSION = '1.3',
+    CLASSY_VERSION = '1.4',
     root = this,
     old_class = root.Class,
     disable_constructor = false;

@@ -4,12 +4,15 @@
  * :copyright: (c) 2011 by Armin Ronacher. 
  * :license: BSD.
  */
-
-;(function(undefined) {
+!function (definition) {
+  if (typeof module != 'undefined' && module.exports) module.exports = definition()
+  else if (typeof define == 'function' && typeof define.amd == 'object') define(definition)
+  else this.Class = definition()
+}(function (undefined) {
   var
     CLASSY_VERSION = '1.4',
-    root = this,
-    old_class = root.Class,
+    context = this,
+    old = context.Class,
     disable_constructor = false;
 
   /* we check if $super is in use by a class if we can.  But first we have to
@@ -52,11 +55,11 @@
      in combination with other libraries. */
   Class.$noConflict = function() {
     try {
-      setOrUnset(root, 'Class', old_class);
+      setOrUnset(context, 'Class', old);
     }
     catch (e) {
       // fix for IE that does not support delete on window
-      root.Class = old_class;
+      context.Class = old;
     }
     return Class;
   };
@@ -119,7 +122,7 @@
     var rv = function() {
       if (disable_constructor)
         return;
-      var proper_this = root === this ? cheapNew(arguments.callee) : this;
+      var proper_this = context === this ? cheapNew(arguments.callee) : this;
       if (proper_this.__init__)
         proper_this.__init__.apply(proper_this, arguments);
       proper_this.$class = rv;
@@ -154,5 +157,5 @@
   };
 
   /* export the class */
-  root.Class = Class;
-})();
+  return Class;
+});
